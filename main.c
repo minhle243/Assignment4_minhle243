@@ -16,7 +16,7 @@ void add_item(Item *item_list, double price, char *sku, char *category, char *na
 	item_list[index].name = (char *)malloc(strlen(name) + 1);
 	strcpy(item_list[index].name, name);
 }
-
+// free the strings in each item
 void free_items(Item *item_list, int size){
 	for(int i = 0; i < size; i++){
 		free(item_list[i].sku);
@@ -34,6 +34,7 @@ double average_price(Item *item_list, int size){
 	return total/size;
 }
 
+// prints every item
 void print_items(Item *item_list, int size){
 	for(int i = 0; i < size; i++){
 		printf("############### \n");
@@ -57,9 +58,7 @@ int main(int argc, char *argv[]){
 	add_item(item_list, 6.25, "45088", "Bakery", "Cookies", 4);
 	
 	print_items(item_list, size);
-	
-	double avg = average_price(item_list, size);
-	printf("Average price of items = %f\n", avg);
+	printf("Average price of items = %f\n", average_price(item_list, size));
 	
 	if(argc > 1){
 		char *search_sku = argv[1];
@@ -82,7 +81,8 @@ int main(int argc, char *argv[]){
 		}
 	}
 	
-	free_items(item_list, size); //free memory
+	free_items(item_list, size); 
 	
 	return 0;
 }
+
